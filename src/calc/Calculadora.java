@@ -129,9 +129,9 @@ public class Calculadora{
                       }
                   }
                   
-//                  while(!pila.vacia()){
-//                      posfijaa += pila.quitar();
-//                  }
+                  while(!pila.vacia()){
+                      posfijaa += pila.quitar();
+                  }
              return posfijaa;     
       }
       
