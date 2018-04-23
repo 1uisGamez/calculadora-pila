@@ -99,11 +99,24 @@ public class Calculadora{
       }
       
       public static double calcular(String expPosfija){
-      	double resultado = 0.0;
+      	//double resultado = 0.0;
+        Pila pila = new Pila();
+          for (int i = 0; i < expPosfija.length(); i++) {
+              char letra = expPosfija.charAt(i);
+              if(!operador(letra)){
+                  double num = new Double(letra + "");
+                  pila.poner(num);
+              }else{
+                  double num2 = (double)pila.quitar();
+                  double num1 = (double)pila.quitar();
+                  double num3 = operacion(letra , num1, num2);
+                  pila.poner(num3);
+              }
+          }
       	//Colocar aqu� las instrucciones
         String Posfija = conva(expPosfija);
           System.out.println(expPosfija);  
-      	return resultado;
+      	return (double)pila.cima();
       }
       private static String conva(String expPofija){
           String posfijaa = "";
@@ -134,6 +147,16 @@ public class Calculadora{
                   }
              return posfijaa;     
       }
+
+    private static double operacion(char letra, double num1, double num2) {
+        if(letra == '*') return num1 * num2;
+        if(letra == '/') return num1 / num2;
+        if(letra == '+') return num1 + num2;
+        if(letra == '-') return num1 - num2;
+        if(letra == '^') return Math.pow(num2, num1);
+            
+        return 0;
+    }
       
       
 }
