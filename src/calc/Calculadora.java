@@ -2,9 +2,10 @@ package calc;
 
 public class Calculadora{
 	  public static void main(String arg[]){
-			String expInfija = Leer.cadena("Digite exprsion aritmetica a calcular");
+			String expInfija = Leer.cadena("Digite expresion aritmetica a calcular");
 			String expPosfija = infijaApostfija(expInfija);
-			System.out.println("El resultado es : "+calcular(expPosfija));
+			
+                        System.out.println("El resultado es : "+calcular(expPosfija));
 	  }
 
       public static String infijaApostfija(String exp){
@@ -55,6 +56,33 @@ public class Calculadora{
       	          op = true;
       	   return op;
       }
+      
+      //NUEVO
+      private static boolean esOperador(char letra){
+          if(letra == '*' || letra == '/' || letra == '+' || letra == '-' ||
+                  letra == '(' || letra == ')' || letra == '^'){
+              return true;
+          }
+              return false;
+      }
+      
+      private static int prioridadExpresion(char operador){
+          if (operador == '^') return 4;
+          if (operador == '*' || operador == '/') return 2;
+          if (operador == '+' || operador == '-') return 1;
+          if (operador == '(') return 5;
+          return 0;
+      }
+      
+      private static int prioridadPila(char operador){
+          if (operador == '^') return 3;
+          if (operador == '*' || operador == '/') return 2;
+          if (operador == '+' || operador == '-') return 1;
+          if (operador == '(') return 0;
+          return 0;
+      }
+      
+      
       private static int prioridad(Character op){
   		   int r = 4;
 		   if (op != null)
@@ -73,6 +101,35 @@ public class Calculadora{
       public static double calcular(String expPosfija){
       	double resultado = 0.0;
       	//Colocar aqu� las instrucciones
+        String Posfija = conva(expPosfija);
+          
       	return resultado;
       }
+      private static String conva(String expPofija){
+          String posfijaa = "";
+                  Pila pila = new Pila();
+                  for(int i = 0; i<expPofija.length();i++){
+                      char letra = expPofija.charAt(i);
+                      if(esOperador(expPofija.charAt(i))){
+                          if(pila.vacia()){
+                              pila.poner(letra);
+                          }else{
+                              int pe = prioridadExpresion(letra);
+                              int pp = prioridadPila((char)pila.cima());
+                              if(pe > pp){
+                                  pila.poner(letra);
+                              }else{
+                                  posfijaa += pila.quitar();
+                                  pila.poner(letra);
+                              }
+                          }
+                          
+                      }else{
+                          posfijaa += letra;
+                      }
+                  }
+                  return posfijaa;
+      }
+      
+      
 }

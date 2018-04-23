@@ -1,7 +1,6 @@
 package calc;
 
 public class Pila <T>{
-//    luis gamez
     private T v[];
     private int tope, max;
     public Pila(){
@@ -31,7 +30,7 @@ public class Pila <T>{
         if(!vacia())
            dato = v[tope--];
         else
-           System.out.println("Pila Vac�a...!");
+           System.out.println("Pila Vacia...!");
         return dato;
     }
     public T cima(){
@@ -40,4 +39,8 @@ public class Pila <T>{
     	else
     	   return null;   
     }	
+    
+    public T elementoTope(){
+        return v[tope -1];
+    }
 }
