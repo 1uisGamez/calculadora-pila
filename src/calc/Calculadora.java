@@ -3,7 +3,7 @@ package calc;
 public class Calculadora{
 	  public static void main(String arg[]){
 			String expInfija = Leer.cadena("Digite expresion aritmetica a calcular");
-			String expPosfija = infijaApostfija(expInfija);
+			String expPosfija = infijaApostfija("La expresion pos fija es: " + expInfija);
 			
                         System.out.println("El resultado es : "+calcular(expPosfija));
 	  }
@@ -102,7 +102,7 @@ public class Calculadora{
       	double resultado = 0.0;
       	//Colocar aqu� las instrucciones
         String Posfija = conva(expPosfija);
-          
+          System.out.println(expPosfija);  
       	return resultado;
       }
       private static String conva(String expPofija){
@@ -110,7 +110,7 @@ public class Calculadora{
                   Pila pila = new Pila();
                   for(int i = 0; i<expPofija.length();i++){
                       char letra = expPofija.charAt(i);
-                      if(esOperador(expPofija.charAt(i))){
+                      if(operador(expPofija.charAt(i))){
                           if(pila.vacia()){
                               pila.poner(letra);
                           }else{
@@ -128,7 +128,11 @@ public class Calculadora{
                           posfijaa += letra;
                       }
                   }
-                  return posfijaa;
+                  
+//                  while(!pila.vacia()){
+//                      posfijaa += pila.quitar();
+//                  }
+             return posfijaa;     
       }
       
       
